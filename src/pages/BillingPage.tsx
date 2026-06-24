@@ -4,7 +4,11 @@ import { useAuth } from '@/contexts/AuthContext';
 import { AppLayout } from '@/components/layouts/AppLayout';
 import { supabase } from '@/db/supabase';
 import { toast } from 'sonner';
-import { Check, CreditCard, Calendar, Zap, AlertTriangle, ExternalLink, Coins } from 'lucide-react';
+import {
+  Check, CreditCard, Calendar, Zap, AlertTriangle, ExternalLink, Coins,
+  FlaskConical, ShieldCheck, Users, Code2, Rocket, FileText,
+  Bookmark, BarChart2, Download,
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const FREE_FEATURES = [
@@ -28,6 +32,20 @@ const PRO_FEATURES = [
   'Watchlists & Blueprints',
   'Export Features',
   '500 AI Credits Every Month',
+];
+
+// Map of feature names to what they unlock (used in paywall banner)
+const FEATURE_PERKS: Array<{ icon: typeof Zap; label: string; sub: string }> = [
+  { icon: FlaskConical, label: 'Research Agent',        sub: 'Deep-dive market research in seconds' },
+  { icon: ShieldCheck,  label: 'Validation Agent',      sub: 'Validate your idea with real data' },
+  { icon: Users,        label: 'Competitor Intel',       sub: 'Full AI dossiers on any competitor' },
+  { icon: Code2,        label: 'MVP Planner',            sub: 'Turn ideas into technical roadmaps' },
+  { icon: Rocket,       label: 'Launch Agent',           sub: 'Go-to-market plans that convert' },
+  { icon: FileText,     label: 'Startup Teardown',       sub: 'Learn from what others built' },
+  { icon: Bookmark,     label: 'Watchlists & Blueprints',sub: 'Save and track your best opportunities' },
+  { icon: BarChart2,    label: 'Kira AI Advisor',        sub: 'Your personal AI cofounder on demand' },
+  { icon: Download,     label: 'Export Reports',         sub: 'Download PDF & JSON reports' },
+  { icon: Coins,        label: '500 Credits / Month',    sub: 'Run up to 50 full AI analyses monthly' },
 ];
 
 const STATUS_LABELS: Record<string, { label: string; color: string }> = {
@@ -132,18 +150,39 @@ export default function BillingPage() {
     <AppLayout>
       <div className="p-6 md:p-8 max-w-4xl mx-auto space-y-8">
 
-        {/* Paywall banner */}
+        {/* Paywall banner — shown when redirected from a gated feature */}
         {searchParams.get('reason') === 'paywall' && (
-          <div className="rounded-2xl border border-[#C5FF00]/20 bg-[#C5FF00]/[0.04] p-5 flex items-start gap-4">
-            <div className="w-9 h-9 rounded-xl bg-[#C5FF00]/10 border border-[#C5FF00]/20 flex items-center justify-center shrink-0 mt-0.5">
-              <Zap className="w-4 h-4 text-[#C5FF00]" />
+          <div className="rounded-2xl border border-[#C5FF00]/20 bg-[#C5FF00]/[0.03] p-6 space-y-5">
+            {/* Header */}
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-xl bg-[#C5FF00]/10 border border-[#C5FF00]/20 flex items-center justify-center shrink-0">
+                <Zap className="w-5 h-5 text-[#C5FF00]" />
+              </div>
+              <div>
+                <p className="text-base font-bold text-white">Unlock Pro to continue</p>
+                <p className="text-white/45 text-sm mt-0.5">
+                  You tried to access a Pro-only feature. Upgrade to get full access to all AI agents and tools.
+                </p>
+              </div>
             </div>
-            <div>
-              <p className="text-sm font-semibold text-white">Pro required</p>
-              <p className="text-white/50 text-xs mt-0.5">
-                Upgrade to Pro to unlock all five AI agents, workspace tools, and 500 monthly credits.
-              </p>
+            {/* Feature grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+              {FEATURE_PERKS.map(({ icon: Icon, label, sub }) => (
+                <div key={label} className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+                  <div className="w-7 h-7 rounded-lg bg-[#C5FF00]/10 border border-[#C5FF00]/15 flex items-center justify-center shrink-0 mt-0.5">
+                    <Icon className="w-3.5 h-3.5 text-[#C5FF00]" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium text-white/80 text-balance">{label}</p>
+                    <p className="text-xs text-white/35 mt-0.5 text-pretty">{sub}</p>
+                  </div>
+                </div>
+              ))}
             </div>
+            {/* CTA */}
+            <p className="text-xs text-white/30 text-center">
+              Choose a plan below to get started — cancel anytime.
+            </p>
           </div>
         )}
 

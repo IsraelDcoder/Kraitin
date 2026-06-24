@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import NotFound from '@/pages/NotFound';
 import IntersectObserver from '@/components/common/IntersectObserver';
 import { PageTransition } from '@/components/common/PageTransition';
 import { Toaster } from '@/components/ui/sonner';
@@ -50,7 +51,7 @@ const App: React.FC = () => {
           <PageTransition>
             <Routes>
               {routes.map((route, index) => renderRoute(route, index))}
-              <Route path="*" element={<Navigate to="/" replace />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </PageTransition>
         </GuideProvider>
