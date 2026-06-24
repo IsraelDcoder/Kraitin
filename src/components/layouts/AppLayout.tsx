@@ -215,20 +215,6 @@ function SidebarContent({
           {!collapsed && <span className="text-[13px] font-medium">Take the tour</span>}
         </button>
 
-        {/* Docs & Guides link */}
-        <Link
-          to="/docs"
-          onClick={onNavClick}
-          title={collapsed ? 'Docs & Guides' : undefined}
-          className={cn(
-            'btn-press flex items-center h-8 rounded-md text-white/25 hover:text-white/60 hover:bg-white/[0.04] transition-all w-full',
-            collapsed ? 'justify-center px-0 w-10 mx-auto' : 'gap-2.5 px-2.5'
-          )}
-        >
-          <BookOpen className="w-3.5 h-3.5 shrink-0" />
-          {!collapsed && <span className="text-[13px] font-medium">Docs & Guides</span>}
-        </Link>
-
         {!collapsed && (
           <>
             {subscription && subscription.tier !== 'free' && (() => {

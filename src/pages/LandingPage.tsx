@@ -1620,14 +1620,14 @@ export default function LandingPage() {
               <p className="text-[11px] font-semibold text-white/40 uppercase tracking-widest mb-3">Updates</p>
               <ul className="space-y-2">
                 {[
-                  { label: 'Changelog',   href: '#changelog' },
-                  { label: 'Roadmap',     href: '#roadmap' },
+                  { label: 'Changelog',     href: '#changelog' },
+                  { label: 'Roadmap',       href: '#roadmap' },
                   { label: 'Founder Story', href: '#story' },
-                  { label: 'Docs',        href: '#docs' },
-                  { label: 'Affiliate',   href: '/affiliate' },
+                  { label: 'Affiliate',     href: '/affiliate' },
                 ].map(l => (
                   <li key={l.label}><a href={l.href} className="text-[12px] text-white/30 hover:text-white/70 transition-colors">{l.label}</a></li>
                 ))}
+                <li><Link to="/docs" className="text-[12px] text-white/30 hover:text-white/70 transition-colors">Docs & Guides</Link></li>
               </ul>
             </div>
             {/* Legal */}
