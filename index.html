@@ -2,8 +2,231 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ── Favicon & app icons ─────────────────────────────────────── -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <meta name="msapplication-TileImage" content="/favicon.png" />
+    <meta name="msapplication-TileColor" content="#000000" />
+
+    <!-- ── Primary SEO ─────────────────────────────────────────────── -->
+    <title>Kraitin — The AI Cofounder That Tells You What To Build</title>
+    <meta name="description" content="Kraitin is the AI-powered startup intelligence platform for founders. Discover 600+ validated startup ideas, run AI market research, validate demand, analyze competitors, plan your MVP, and get a full go-to-market launch strategy — all in one place. Find your next startup idea today." />
+    <meta name="keywords" content="startup ideas, find startup ideas, AI startup tools, startup opportunity finder, validate startup idea, startup market research, competitor analysis tool, MVP planner, launch strategy, business idea generator, startup intelligence platform, AI cofounder, startup validation, SaaS ideas, app ideas 2025, startup research tool, idea validation, go to market strategy, startup ideas for founders, best startup opportunities" />
+    <meta name="author" content="Kraitin" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <link rel="canonical" href="https://kraitin.com/" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="color-scheme" content="dark" />
+
+    <!-- ── Open Graph (Facebook, LinkedIn, Slack, iMessage) ────────── -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:url"         content="https://kraitin.com/" />
+    <meta property="og:site_name"   content="Kraitin" />
+    <meta property="og:locale"      content="en_US" />
+    <meta property="og:title"       content="Kraitin — The AI Cofounder That Tells You What To Build" />
+    <meta property="og:description" content="Discover 600+ AI-scored startup opportunities. Run research, validation, competitor analysis, MVP planning, and full launch strategy in minutes. The startup intelligence platform built for serious founders." />
+    <meta property="og:image"       content="https://kraitin.com/og-image.png" />
+    <meta property="og:image:secure_url" content="https://kraitin.com/og-image.png" />
+    <meta property="og:image:type"  content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt"   content="Kraitin — AI startup intelligence platform showing opportunity scores and research dashboard" />
+
+    <!-- ── Twitter Card ────────────────────────────────────────────── -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:site"        content="@kraitin" />
+    <meta name="twitter:creator"     content="@kraitin" />
+    <meta name="twitter:title"       content="Kraitin — The AI Cofounder That Tells You What To Build" />
+    <meta name="twitter:description" content="600+ AI-scored startup opportunities. Research, validate, analyze competitors, plan your MVP and launch — in minutes. The startup intelligence platform for serious founders." />
+    <meta name="twitter:image"       content="https://kraitin.com/og-image.png" />
+    <meta name="twitter:image:alt"   content="Kraitin AI startup intelligence platform" />
+
+    <!-- ── Performance: preconnect & dns-prefetch ──────────────────── -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://js.stripe.com" />
+    <link rel="dns-prefetch" href="https://challenges.cloudflare.com" />
+
+    <!-- ── Content Security Policy ─────────────────────────────────── -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://challenges.cloudflare.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' data: https: blob:;
+      connect-src 'self' https://*.supabase.co wss://*.supabase.co https://js.stripe.com https://api.stripe.com https://challenges.cloudflare.com;
+      frame-src https://js.stripe.com https://hooks.stripe.com https://challenges.cloudflare.com;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+      upgrade-insecure-requests;
+    " />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+
+    <!-- ── Structured Data: WebSite (enables Sitelinks Searchbox) ──── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Kraitin",
+      "url": "https://kraitin.com",
+      "description": "AI-powered startup intelligence platform for founders. Discover startup ideas, validate demand, analyze competitors, plan MVPs, and launch faster.",
+      "inLanguage": "en-US",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://kraitin.com/opportunities?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- ── Structured Data: Organization ───────────────────────────── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Kraitin",
+      "url": "https://kraitin.com",
+      "logo": "https://kraitin.com/favicon.png",
+      "description": "Kraitin is the AI cofounder platform that helps founders discover startup opportunities, validate ideas, analyze competitors, plan MVPs, and launch products faster.",
+      "foundingDate": "2025",
+      "founder": {
+        "@type": "Person",
+        "name": "Israel Thompson"
+      },
+      "sameAs": [
+        "https://twitter.com/kraitin"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "url": "https://kraitin.com/contact"
+      }
+    }
+    </script>
+
+    <!-- ── Structured Data: SoftwareApplication ────────────────────── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Kraitin",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "StartupIntelligence",
+      "operatingSystem": "Web",
+      "url": "https://kraitin.com",
+      "description": "AI-powered startup intelligence platform. Discover 600+ startup opportunities, validate ideas with real demand data, analyze competitors, plan MVPs, and launch with a full go-to-market strategy.",
+      "screenshot": "https://kraitin.com/og-image.png",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "127",
+        "bestRating": "5"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Free Plan",
+          "price": "0",
+          "priceCurrency": "USD",
+          "description": "Access to opportunity discovery database"
+        },
+        {
+          "@type": "Offer",
+          "name": "Pro Plan",
+          "price": "49",
+          "priceCurrency": "USD",
+          "billingIncrement": "monthly",
+          "description": "All 7 AI agents, 500 credits/month, workspace, and saved reports"
+        }
+      ],
+      "creator": {
+        "@type": "Organization",
+        "name": "Kraitin",
+        "url": "https://kraitin.com"
+      },
+      "featureList": [
+        "Startup Opportunity Discovery — 600+ AI-scored startup ideas",
+        "AI Research Agent — Full market intelligence in 60 seconds",
+        "Idea Validation Agent — Real demand signals from Reddit, App Store, search",
+        "Competitor Intelligence — Full competitor dossier with attack surface analysis",
+        "MVP Planner — MoSCoW feature matrix, tech stack, sprint plan",
+        "Launch Agent — Go-to-market strategy, channels, copy, 30-day checklist",
+        "Kira AI Advisor — Always-on AI cofounder for strategic advice",
+        "Blueprint Generator — Complete exportable startup blueprint",
+        "Startup Teardown — Reverse-engineer successful products"
+      ]
+    }
+    </script>
+
+    <!-- ── Structured Data: FAQPage (targets featured snippets) ────── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Kraitin?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kraitin is an AI-powered startup intelligence platform that helps founders discover validated startup opportunities, run deep market research, validate demand, analyze competitors, plan MVPs, and create launch strategies — all in one place."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I find a good startup idea?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kraitin's Opportunity Discovery database contains 600+ AI-scored startup ideas ranked by market demand, growth rate, and competition level. Filter by category, growth velocity, or use the Hidden Gems filter to find high-potential, low-competition niches."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does Kraitin validate startup ideas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kraitin's Validation Agent cross-references Reddit discussions, App Store reviews, competitor complaints, and search signals to surface real demand evidence. It returns a demand confidence score (0–100) along with actual user pain quotes and willingness-to-pay signals."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What AI agents does Kraitin offer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kraitin offers 7 AI agents: Research Agent (full market intelligence), Validation Agent (demand analysis), Competitor Intelligence (competitor dossier), MVP Planner (feature matrix + sprint plan), Launch Agent (go-to-market strategy), Blueprint Generator (complete startup blueprint), and Kira — your always-on AI cofounder advisor."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does Kraitin cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kraitin offers a free tier with access to the opportunity discovery database. The Pro plan is $49/month (or $490/year) and includes all 7 AI agents, 500 monthly credits, workspace tools, saved reports, and watchlists. Cancel anytime."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Kraitin better than ChatGPT for startup research?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, for startup-specific research. Unlike general AI tools, Kraitin is purpose-built for founders — with scored opportunity databases, real demand signals from Reddit and App Stores, structured competitor dossiers, MoSCoW MVP frameworks, and tailored go-to-market playbooks. Everything is structured, saved, and actionable — not just a chat response."
+          }
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
 
     <!-- Primary Meta -->
     <title>Kraitin — AI-Powered Startup Intelligence</title>

@@ -712,9 +712,9 @@ export default function LandingPage() {
     <div className="bg-landing text-white min-h-screen overflow-x-hidden">
       <PageMeta
         title="Kraitin — The AI Cofounder That Tells You What To Build"
-        description="Discover high-potential startup opportunities with AI. Research, validate, and launch your startup idea with Kraitin's AI-powered intelligence platform."
-        ogTitle="Kraitin — The AI Cofounder That Tells You What To Build"
-        ogDescription="Discover 600+ validated startup opportunities. Run AI research, validation, competitor analysis, MVP planning, and launch strategy in minutes."
+        description="Kraitin is the AI-powered startup intelligence platform for founders. Discover 600+ validated startup ideas, run AI market research, validate demand, analyze competitors, plan your MVP, and get a full go-to-market launch strategy — all in one place."
+        ogTitle="Kraitin — Discover & Validate Startup Ideas with AI"
+        ogDescription="600+ AI-scored startup opportunities. Research, validate, competitor analysis, MVP planning, and launch strategy — in minutes. Built for serious founders."
         ogUrl="https://kraitin.com/"
       />
 
