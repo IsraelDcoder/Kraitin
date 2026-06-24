@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { AppLayout } from '@/components/layouts/AppLayout';
 import { PaywallModal } from '@/components/common/PaywallModal';
@@ -9,7 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { sendAiSearchRequest } from '@/lib/sse';
 import { supabase } from '@/db/supabase';
 import { toast } from 'sonner';
-import { Rocket, Loader2, X } from 'lucide-react';
+import { Rocket, Loader2, X, BookOpen } from 'lucide-react';
 import { IntelligenceDashboard } from '@/components/intelligence/IntelligenceDashboard';
 import { RecentTasks } from '@/components/intelligence/RecentTasks';
 import { buildIntelligencePrompt, extractIntelligenceJSON, parseSSEChunk } from '@/components/intelligence/prompts';
@@ -165,6 +165,9 @@ export default function LaunchAgentPage() {
               <p className="text-sm text-white/25 max-w-sm mx-auto text-pretty">
                 Get a complete launch intelligence dashboard — growth channels, channel scores, competitor positioning, and a data-driven launch verdict.
               </p>
+              <Link to="/docs#launch-agent" className="inline-flex items-center gap-1.5 mt-5 text-xs text-white/25 hover:text-orange-400/70 transition-colors">
+                <BookOpen className="w-3 h-3" /> How to use Launch Agent
+              </Link>
             </div>
             <RecentTasks reportType="launch" userId={user?.id} label="Recent Launch Strategies" />
           </div>

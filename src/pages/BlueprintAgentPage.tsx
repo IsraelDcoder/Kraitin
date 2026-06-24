@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { AppLayout } from '@/components/layouts/AppLayout';
 import { PaywallModal } from '@/components/common/PaywallModal';
@@ -9,7 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { sendAiSearchRequest } from '@/lib/sse';
 import { supabase } from '@/db/supabase';
 import { toast } from 'sonner';
-import { FileCode2, Loader2, X } from 'lucide-react';
+import { FileCode2, Loader2, X, BookOpen } from 'lucide-react';
 import { IntelligenceDashboard } from '@/components/intelligence/IntelligenceDashboard';
 import { RecentTasks } from '@/components/intelligence/RecentTasks';
 import { extractIntelligenceJSON, parseSSEChunk } from '@/components/intelligence/prompts';
@@ -263,6 +263,9 @@ export default function BlueprintAgentPage() {
                 <span key={tag} className="text-[10px] px-2.5 py-1 rounded-full border border-white/[0.07] text-white/30">{tag}</span>
               ))}
             </div>
+            <Link to="/docs#blueprint" className="inline-flex items-center gap-1.5 text-xs text-white/25 hover:text-[#C5FF00]/70 transition-colors">
+              <BookOpen className="w-3 h-3" /> How to use Blueprint Generator
+            </Link>
             <RecentTasks reportType="blueprint" userId={user?.id} label="Recent Blueprints" />
           </div>
         )}

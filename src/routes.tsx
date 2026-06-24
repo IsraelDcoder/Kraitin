@@ -38,6 +38,7 @@ const CompetitorIntelligencePage = lazy(() => import('./pages/CompetitorIntellig
 
 const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage'));
 const ResetPasswordPage  = lazy(() => import('./pages/ResetPasswordPage'));
+const DocsPage           = lazy(() => import('./pages/DocsPage'));
 const SettingsLayout = lazy(() => import('./components/settings/SettingsLayout').then(m => ({ default: m.SettingsLayout })));
 const ProfileSettings             = lazy(() => import('./pages/settings/ProfileSettings'));
 const FounderPreferencesSettings  = lazy(() => import('./pages/settings/FounderPreferencesSettings'));
@@ -87,6 +88,7 @@ export function buildRoutes(): RouteConfig[] {
     { name: 'Privacy',          path: '/privacy',          element: <Wrap><PrivacyPage /></Wrap>,           public: true },
     { name: 'Contact',          path: '/contact',          element: <Wrap><ContactPage /></Wrap>,           public: true },
     { name: 'Affiliate',        path: '/affiliate',        element: <Wrap><AffiliatePage /></Wrap>,         public: true },
+    { name: 'Docs',             path: '/docs',             element: <Suspense fallback={null}><DocsPage /></Suspense>, public: true },
     { name: 'Forgot Password',  path: '/forgot-password',  element: <Wrap><ForgotPasswordPage /></Wrap>,    public: true },
     { name: 'Reset Password',   path: '/reset-password',   element: <Wrap><ResetPasswordPage /></Wrap>,     public: true },
     { name: 'Verify Email',     path: '/verify-email',     element: <Suspense fallback={null}><VerifyEmailPage /></Suspense>, public: true },

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { AppLayout } from '@/components/layouts/AppLayout';
 import { PaywallModal } from '@/components/common/PaywallModal';
@@ -9,7 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { sendAiSearchRequest } from '@/lib/sse';
 import { supabase } from '@/db/supabase';
 import { toast } from 'sonner';
-import { Code2, Loader2, X } from 'lucide-react';
+import { Code2, Loader2, X, BookOpen } from 'lucide-react';
 import { IntelligenceDashboard } from '@/components/intelligence/IntelligenceDashboard';
 import { RecentTasks } from '@/components/intelligence/RecentTasks';
 import { buildIntelligencePrompt, extractIntelligenceJSON, parseSSEChunk } from '@/components/intelligence/prompts';
@@ -166,6 +166,9 @@ export default function MvpPlannerPage() {
               <p className="text-sm text-white/25 max-w-sm mx-auto text-pretty">
                 Get a complete MVP intelligence dashboard — build difficulty, feature gaps, competitor positioning, and a go/no-go recommendation.
               </p>
+              <Link to="/docs#mvp-planner" className="inline-flex items-center gap-1.5 mt-5 text-xs text-white/25 hover:text-violet-400/70 transition-colors">
+                <BookOpen className="w-3 h-3" /> How to use MVP Planner
+              </Link>
             </div>
             <RecentTasks reportType="mvp" userId={user?.id} label="Recent MVP Plans" />
           </div>

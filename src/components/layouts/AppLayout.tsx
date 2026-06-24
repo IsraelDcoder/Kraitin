@@ -11,7 +11,7 @@ import {
   DollarSign, TrendingUp, Star, Gem, Bot, Building2,
   Smartphone, Bookmark, Eye, Layers, Map, BarChart3,
   PanelLeftClose, PanelLeftOpen, Sparkles, PenLine, FileCode2, Coins,
-  LayoutDashboard,
+  LayoutDashboard, BookOpen,
 } from 'lucide-react';
 import { NotificationBell } from '@/components/notifications/NotificationBell';
 import { SupportChat } from '@/components/support/SupportChat';
@@ -214,6 +214,20 @@ function SidebarContent({
           <Sparkles className="w-3.5 h-3.5 shrink-0" />
           {!collapsed && <span className="text-[13px] font-medium">Take the tour</span>}
         </button>
+
+        {/* Docs & Guides link */}
+        <Link
+          to="/docs"
+          onClick={onNavClick}
+          title={collapsed ? 'Docs & Guides' : undefined}
+          className={cn(
+            'btn-press flex items-center h-8 rounded-md text-white/25 hover:text-white/60 hover:bg-white/[0.04] transition-all w-full',
+            collapsed ? 'justify-center px-0 w-10 mx-auto' : 'gap-2.5 px-2.5'
+          )}
+        >
+          <BookOpen className="w-3.5 h-3.5 shrink-0" />
+          {!collapsed && <span className="text-[13px] font-medium">Docs & Guides</span>}
+        </Link>
 
         {!collapsed && (
           <>
