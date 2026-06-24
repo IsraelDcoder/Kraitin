@@ -48,6 +48,47 @@
     " />
     <!-- Clickjacking protection (belt + suspenders: meta tag + CSP frame-ancestors via server header) -->
     <meta http-equiv="X-Frame-Options" content="DENY" />
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Kraitin",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "url": "https://kraitin.com",
+      "description": "AI-powered startup intelligence platform. Discover opportunities, validate ideas, analyze competitors, and launch faster.",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Free Plan",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        {
+          "@type": "Offer",
+          "name": "Pro Plan",
+          "price": "49",
+          "priceCurrency": "USD",
+          "billingIncrement": "monthly"
+        }
+      ],
+      "creator": {
+        "@type": "Organization",
+        "name": "Kraitin",
+        "url": "https://kraitin.com"
+      },
+      "featureList": [
+        "Startup Opportunity Discovery",
+        "AI Research Agent",
+        "Idea Validation Agent",
+        "Competitor Intelligence",
+        "MVP Planner",
+        "Launch Agent",
+        "Kira AI Advisor"
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

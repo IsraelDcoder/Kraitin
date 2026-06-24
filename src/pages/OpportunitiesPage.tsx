@@ -8,6 +8,7 @@ import type { Opportunity } from '@/types/types';
 import { Badge } from '@/components/ui/badge';
 import { Search, Star, Filter, Flame, TrendingUp, X, RefreshCw, BarChart2, ArrowUpRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import PageMeta from '@/components/common/PageMeta';
 import { toast } from 'sonner';
 
 const CATEGORIES = ['All', 'AI', 'Health', 'Education', 'Productivity', 'B2B SaaS', 'Consumer', 'Mobile Apps', 'Finance'];
@@ -260,6 +261,14 @@ export default function OpportunitiesPage() {
 
   return (
     <AppLayout>
+      <PageMeta
+        title="Startup Opportunities — Kraitin"
+        description="Browse 600+ AI-scored startup opportunities across SaaS, mobile apps, health, education, and more. Filter by growth rate, category, and hidden gems."
+        ogTitle="600+ Startup Opportunities — Kraitin"
+        ogDescription="Discover fast-growing startup niches ranked by AI. Filter by category, growth rate, and market size."
+        ogUrl="https://kraitin.com/opportunities"
+        noIndex
+      />
       <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-start justify-between gap-4">

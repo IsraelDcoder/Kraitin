@@ -6,6 +6,7 @@ import { supabase } from '@/db/supabase';
 import type { Opportunity, Subscription } from '@/types/types';
 import { cn } from '@/lib/utils';
 import { slugify } from '@/lib/slugify';
+import PageMeta from '@/components/common/PageMeta';
 import { toast } from 'sonner';
 import {
   TrendingUp, ArrowUpRight, Bookmark, BookmarkX,
@@ -708,6 +709,11 @@ export default function DashboardHomePage() {
 
   return (
     <AppLayout>
+      <PageMeta
+        title="Command Center — Kraitin"
+        description="Your personal startup intelligence dashboard. Today's opportunities, competitor alerts, trending keywords, and market radar — all in one place."
+        noIndex
+      />
       <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-8">
 
         {/* ── Page header ─────────────────────────────────────── */}

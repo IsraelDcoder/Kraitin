@@ -3,6 +3,7 @@ import { Check, ArrowRight, X, Plus, Menu, Clock, Zap, TrendingUp, Shield, Chevr
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { KraitinLogo } from '@/components/ui/KraitinLogo';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import PageMeta from '@/components/common/PageMeta';
 
 /* ─── DATA ─────────────────────────────────────────────── */
 
@@ -709,6 +710,13 @@ export default function LandingPage() {
 
   return (
     <div className="bg-landing text-white min-h-screen overflow-x-hidden">
+      <PageMeta
+        title="Kraitin — The AI Cofounder That Tells You What To Build"
+        description="Discover high-potential startup opportunities with AI. Research, validate, and launch your startup idea with Kraitin's AI-powered intelligence platform."
+        ogTitle="Kraitin — The AI Cofounder That Tells You What To Build"
+        ogDescription="Discover 600+ validated startup opportunities. Run AI research, validation, competitor analysis, MVP planning, and launch strategy in minutes."
+        ogUrl="https://kraitin.com/"
+      />
 
       {/* ── NAV ── */}
       <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 h-16 border-b border-white/[0.06] bg-black/80 backdrop-blur-md">
