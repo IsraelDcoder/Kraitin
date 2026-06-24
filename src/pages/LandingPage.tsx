@@ -1628,6 +1628,7 @@ export default function LandingPage() {
                   <li key={l.label}><a href={l.href} className="text-[12px] text-white/30 hover:text-white/70 transition-colors">{l.label}</a></li>
                 ))}
                 <li><Link to="/docs" className="text-[12px] text-white/30 hover:text-white/70 transition-colors">Docs & Guides</Link></li>
+                <li><Link to="/blog" className="text-[12px] text-white/30 hover:text-white/70 transition-colors">Blog</Link></li>
               </ul>
             </div>
             {/* Legal */}
