@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+Allow: /pricing
+Allow: /affiliate
+Allow: /contact
+Allow: /terms
+Allow: /privacy
+
+Disallow: /dashboard
+Disallow: /research
+Disallow: /validation
+Disallow: /competitors
+Disallow: /mvp-planner
+Disallow: /launch-agent
+Disallow: /reports
+Disallow: /settings
+Disallow: /billing
+Disallow: /onboarding
+Disallow: /auth/
+
+Sitemap: https://kraitin.com/sitemap.xml

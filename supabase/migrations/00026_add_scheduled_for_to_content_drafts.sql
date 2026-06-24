@@ -1,0 +1,1 @@
+alter table public.content_drafts add column if not exists scheduled_for timestamptz null;
