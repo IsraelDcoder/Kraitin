@@ -1,3 +1,5 @@
+// @ts-nocheck
+/// <reference path="../deno-env.d.ts" />
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import Stripe from "npm:stripe@19.1.0";
 
@@ -67,15 +69,34 @@ Deno.serve(async (req) => {
       event_type: "checkout_attempt",
     });
 
-    const { plan, source } = await req.json() as { plan: "monthly" | "yearly"; source?: string };
-    if (!plan || !["monthly", "yearly"].includes(plan)) return fail("Invalid plan", cors);
+    const body = await req.json().catch(() => ({}));
+    const plan = typeof body.plan === "string" ? body.plan.toLowerCase() : "";
+    const source = typeof body.source === "string" ? body.source : undefined;
+    if (plan !== "monthly" && plan !== "yearly") return fail("Invalid plan", cors);
 
-    const priceId = plan === "monthly"
-      ? Deno.env.get("STRIPE_MONTHLY_PRICE_ID")
-      : Deno.env.get("STRIPE_YEARLY_PRICE_ID");
-    if (!priceId) return fail("Price ID not configured for plan: " + plan, cors, 500);
+    const priceEnvName = plan === "monthly"
+      ? "STRIPE_MONTHLY_PRICE_ID"
+      : "STRIPE_YEARLY_PRICE_ID";
+    const priceId = Deno.env.get(priceEnvName);
+    if (!priceId) return fail(`Price ID not configured for plan: ${plan}`, cors, 500);
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" as "2024-06-20" });
+
+    const price = await stripe.prices.retrieve(priceId).catch((err) => {
+      console.error("create-checkout price validation failed", { priceId, plan, error: err });
+      return null;
+    });
+    if (!price || !price.id || price.type !== "recurring" || !price.active) {
+      return fail(
+        `Stripe price ID is invalid. Confirm ${priceEnvName} is set to an active recurring price in the same Stripe account as STRIPE_SECRET_KEY.`,
+        cors,
+        500,
+      );
+    }
+
+    if (!user.email) {
+      return fail("Authenticated user has no email address", cors, 500);
+    }
 
     const { data: sub } = await supabase
       .from("subscriptions")
@@ -117,14 +138,12 @@ Deno.serve(async (req) => {
       metadata: { user_id: user.id },
     });
 
-    await supabase.from("subscriptions").upsert({
-      user_id: user.id,
-      stripe_customer_id: customerId,
-      tier: "free",
-      status: "active",
-      monthly_credits: 0,
-      credits_remaining: 0,
-    }, { onConflict: "user_id" });
+    if (!sub?.stripe_customer_id) {
+      await supabase.from("subscriptions").upsert({
+        user_id: user.id,
+        stripe_customer_id: customerId,
+      }, { onConflict: "user_id" });
+    }
 
     return ok({ url: session.url, sessionId: session.id }, cors);
   } catch (err) {
