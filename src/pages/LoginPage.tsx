@@ -93,7 +93,8 @@ export default function LoginPage() {
 
   const handleGoogleSignIn = async () => {
     setGoogleLoading(true);
-    const { error } = await signInWithGoogle();
+    const flow = mode === 'register' ? 'signup' : 'login';
+    const { error } = await signInWithGoogle(flow);
     if (error) {
       toast.error(error.message || 'Google sign-in failed');
       setGoogleLoading(false);

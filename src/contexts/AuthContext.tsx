@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
 import { supabase } from '@/db/supabase';
 import type { User } from '@supabase/supabase-js';
 import type { Profile, Subscription, FounderProfile } from '@/types/types';
@@ -52,7 +52,7 @@ interface AuthContextType {
   onboardingCompleted: boolean;
   signInWithUsername: (username: string, password: string) => Promise<{ error: Error | null }>;
   signUpWithUsername: (username: string, email: string, password: string, referralCode?: string) => Promise<{ error: Error | null }>;
-  signInWithGoogle: () => Promise<{ error: Error | null }>;
+  signInWithGoogle: (flow?: 'login' | 'signup') => Promise<{ error: Error | null }>;
   signOut: () => Promise<void>;
   refreshProfile: () => Promise<void>;
 }
@@ -79,56 +79,80 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   /** Tracks whether the profile fetch after the latest auth event has completed. */
   const [profileReady, setProfileReady] = useState(false);
+  const latestLoadId = useRef(0);
+
+  const loadUserData = async (userId: string) => {
+    const loadId = ++latestLoadId.current;
+    setProfileReady(false);
+
+    const maxAttempts = 10;
+    const delayMs = 300;
+    let profileData: Profile | null = null;
+    let subscriptionData: Subscription | null = null;
+    let founderProfileData: FounderProfile | null = null;
+
+    for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+      [profileData, subscriptionData, founderProfileData] = await Promise.all([
+        getProfile(userId),
+        getSubscription(userId),
+        getFounderProfile(userId),
+      ]);
+
+      if (profileData || attempt === maxAttempts) {
+        break;
+      }
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
+    }
+
+    if (latestLoadId.current === loadId) {
+      setProfile(profileData);
+      setSubscription(subscriptionData);
+      setFounderProfile(founderProfileData);
+      setProfileReady(true);
+    }
+  };
 
   const refreshProfile = async () => {
-    if (!user) { setProfile(null); setFounderProfile(null); setSubscription(null); return; }
-    const [profileData, subData, fpData] = await Promise.all([
-      getProfile(user.id),
-      getSubscription(user.id),
-      getFounderProfile(user.id),
-    ]);
-    setProfile(profileData);
-    setSubscription(subData);
-    setFounderProfile(fpData);
+    if (!user) {
+      setProfile(null);
+      setFounderProfile(null);
+      setSubscription(null);
+      setProfileReady(true);
+      return;
+    }
+    await loadUserData(user.id);
   };
 
   useEffect(() => {
-    supabase.auth.getSession()
-      .then(({ data: { session } }) => {
+    let canceled = false;
+
+    const initializeAuth = async () => {
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+        if (canceled) return;
+
         setUser(session?.user ?? null);
         if (session?.user) {
-          setProfileReady(false);
-          Promise.all([
-            getProfile(session.user.id),
-            getSubscription(session.user.id),
-            getFounderProfile(session.user.id),
-          ]).then(([p, s, fp]) => {
-            setProfile(p);
-            setSubscription(s);
-            setFounderProfile(fp);
-            setProfileReady(true);
-          });
+          await loadUserData(session.user.id);
         } else {
           setProfileReady(true);
         }
-      })
-      .catch(error => { toast.error(`Session error: ${error.message}`); })
-      .finally(() => { setLoading(false); });
+      } catch (error) {
+        if (!canceled) toast.error(`Session error: ${(error as Error).message}`);
+      } finally {
+        if (!canceled) setLoading(false);
+      }
+    };
 
-    const { data: { subscription: authSub } } = supabase.auth.onAuthStateChange((_event, session) => {
+    initializeAuth();
+
+    const { data: { subscription: authSub } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      if (canceled) return;
       setUser(session?.user ?? null);
       if (session?.user) {
-        setProfileReady(false);
-        Promise.all([
-          getProfile(session.user.id),
-          getSubscription(session.user.id),
-          getFounderProfile(session.user.id),
-        ]).then(([p, s, fp]) => {
-          setProfile(p);
-          setSubscription(s);
-          setFounderProfile(fp);
-          setProfileReady(true);
-        });
+        await loadUserData(session.user.id);
       } else {
         setProfile(null);
         setFounderProfile(null);
@@ -137,7 +161,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     });
 
-    return () => authSub.unsubscribe();
+    return () => {
+      canceled = true;
+      authSub.unsubscribe();
+    };
   }, []);
 
   const signInWithUsername = async (usernameOrEmail: string, password: string) => {
@@ -166,7 +193,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const { error } = await supabase.auth.signUp({
         email: email.trim().toLowerCase(),
         password,
-        options: { data: { username, referred_by: referralCode ?? null } },
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          data: { username, referred_by: referralCode ?? null },
+        },
       });
       if (error) throw error;
       // If we have a referral code, also write it to the profile immediately
@@ -187,12 +217,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const signInWithGoogle = async () => {
+  const signInWithGoogle = async (flow: 'login' | 'signup' = 'login') => {
     try {
       // biome-ignore lint: signInWithOAuth is correct for consumer Google OAuth (not enterprise SAML)
+      const redirectTo = `${window.location.origin}/auth/callback?flow=${flow}`;
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
-        options: { redirectTo: `${window.location.origin}/auth/callback` },
+        options: { redirectTo },
       });
       if (error) throw error;
       return { error: null };
