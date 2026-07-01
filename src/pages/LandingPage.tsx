@@ -1329,10 +1329,9 @@ export default function LandingPage() {
             </div>
             <div className="space-y-3 border-t border-white/[0.06] pt-5">
               {[
-                { label: 'First startup',        value: 'Failed',         dim: true },
-                { label: 'Apps, 0 downloads',    value: 'Multiple',       dim: true },
-                { label: 'Peak MRR',             value: '$10,000/mo',     dim: false },
-                { label: 'Google Docs ideas',    value: 'Still growing',  dim: true },
+                { label: 'First startup', value: 'Failed', dim: true },
+                { label: 'Apps, 0 downloads', value: 'Multiple', dim: true },
+                { label: 'Years building products', value: 'Still growing', dim: true },
               ].map(({ label, value, dim }) => (
                 <div key={label} className="flex items-baseline justify-between gap-3">
                   <span className="text-[11px] text-white/25">{label}</span>
@@ -1349,7 +1348,7 @@ export default function LandingPage() {
             </h2>
 
             <div className="space-y-5 text-[15px] text-white/45 leading-[1.75]">
-              <p>For years, I had the same problem that almost every founder faces:</p>
+              <p>For years, I had the same problem almost every founder faces:</p>
 
               <p className="text-white/70 font-semibold text-base">I never knew what to build.</p>
 
@@ -1359,34 +1358,47 @@ export default function LandingPage() {
 
               <p>Every time I thought I had found the perfect idea, I'd discover someone had already done it better — or worse, I'd spend months building something nobody actually wanted.</p>
 
-              <p className="text-white/60">Then something changed.</p>
+              <p>But the problem wasn't just building.</p>
 
-              <p>One of my products eventually grew to over <span className="text-white font-semibold">$10,000 in monthly revenue</span>.</p>
+              <p>It was knowing what was worth building in the first place.</p>
 
-              <p>But even then, the problem never disappeared. I still found myself constantly searching for the next opportunity. The next market. The next idea. The next startup.</p>
+              <p>Every new idea raised the same questions:</p>
 
-              <p className="text-white/60">That's when I realized something important:</p>
+              <div className="border-l-2 border-white/[0.08] pl-5 space-y-2 my-6">
+                {[
+                  'Is there actually a market?',
+                  'Are people willing to pay for this?',
+                  'Is the competition too strong?',
+                  'Am I about to waste months on the wrong thing?',
+                ].map((q) => (
+                  <p key={q} className="text-[14px] text-white/40">{q}</p>
+                ))}
+              </div>
 
-              <p className="text-white/75 font-medium">I wasn't the only one struggling.</p>
+              <p>Eventually I realized I wasn't the only one asking these questions.</p>
 
-              <p>Thousands of founders, indie hackers, developers, creators, and entrepreneurs were facing the exact same problem. Everyone was asking:</p>
+              <p>Thousands of founders, indie hackers, developers, creators, and entrepreneurs were struggling with exactly the same thing.</p>
+
+              <p>Everyone was asking:</p>
 
               <div className="border-l-2 border-white/[0.08] pl-5 space-y-2 my-6">
                 {[
                   '"What should I build?"',
-                  '"What are people actually willing to pay for?"',
                   '"How do I know if this idea is worth pursuing?"',
-                  '"How do I avoid wasting six months building the wrong thing?"',
-                ].map(q => (
+                  '"How do I validate it before spending months building?"',
+                  '"How do I avoid wasting six months on something nobody wants?"',
+                ].map((q) => (
                   <p key={q} className="text-[14px] text-white/40 italic">{q}</p>
                 ))}
               </div>
 
-              <p>The answers existed. But they were scattered across Reddit threads, App Store reviews, competitor websites, ad libraries, startup communities, and endless spreadsheets.</p>
+              <p>The answers existed. But they were scattered across Reddit threads, App Store reviews, competitor websites, startup communities, research papers, and endless spreadsheets.</p>
 
-              <p className="text-white/70 font-semibold">So we built Kraitin.</p>
+              <p className="text-white/70 font-semibold">So I built Kraitin.</p>
 
-              <p>Kraitin is the platform I wish I had when I started. A place where founders can discover opportunities, validate ideas, understand competitors, plan MVPs, and launch with confidence.</p>
+              <p>Kraitin is the AI startup co-founder I wish I had when I started.</p>
+
+              <p>It helps founders discover startup opportunities, validate ideas, analyze competitors, plan MVPs, and launch with confidence.</p>
 
               <p>Instead of guessing.<br />Instead of gambling.<br />Instead of building in the dark.</p>
 
